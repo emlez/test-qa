@@ -1,0 +1,29 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - QA
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout QA repository
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "esanchezr@better.com.mx"
+
+      - name: Add Production repository
+        run: git remote add JAFRA https://github.com/emlez/test
+
+      - name: Push changes to Production
+        run: |
+          git fetch JAFRA
+          git checkout -b prepare-for-production
+          git merge ${{ github.ref }}
+          git push JAFRA prepare-for-production:main
