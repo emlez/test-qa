@@ -19,7 +19,7 @@ jobs:
           git config --global user.email "esanchezr@better.com.mx"
 
       - name: Add Production repository
-        run: git remote add JAFRA git@github.com:emlez/test.git
+        run: git remote add JAFRA https://github.com/emlez/test.git
 
       - name: Push changes to Production
         run: |
